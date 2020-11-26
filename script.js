@@ -6,38 +6,63 @@ function isNumber(n){
 
 function startGame (){
     const number = Math.floor(Math.random() * 100) + 1;
+    let atm = 3;
 
     function enterUserNumber(){
         const userNumber = prompt('Угадай число от 1 до 100');
-        
+
+        function checkAttemptsNumber(){
+            let check1 = confirm('Попытки закончились. Хотите сыграть еще?');
+            if (check1){
+                atm = 3;
+                startGame();
+            } else {
+                alert('Игра окончена.');
+                return;
+            }
+        } 
+
         if(userNumber === null){
-            alert('Игра окончена');
+            alert('Игра окончена.');
             return;
         }
 
-        if(+userNumber === number){
-            alert('Поздравляю, Вы угадали!!!');
-            return;
-        }
+        switch(true){
+            case(+userNumber > number): 
+                --atm;
+                if (atm === 0){
+                    checkAttemptsNumber();
+                } else {
+                    alert('Загаданное число меньше, осталось попыток:' + atm);
+                    enterUserNumber();
+                }                
+                break;
 
-        if(+userNumber < number){
-            alert('Загаданное число больше');
-            enterUserNumber();
-        }
+            case(+userNumber < number):
+                --atm;
+                if (atm === 0){
+                    checkAttemptsNumber();
+                } else {
+                    alert('Загаданное число больше, осталось попыток:' + atm);
+                    enterUserNumber();
+                }
+                break;
 
-        if(+userNumber > number){
-            alert('Загаданное число меньше');
-            enterUserNumber();
+            case(+userNumber === number):
+                let check2 = confirm('Поздравляю, Вы угадали!Хотите сыграть еще?');
+                if(check2){
+                    atm = 3;
+                    startGame();
+                } else {
+                return;
+                }
+                break;
         }
-
         if(!isNumber(userNumber)){
             alert('Введи число');
             enterUserNumber();
         }
-        
     }
-
-    enterUserNumber();
+        enterUserNumber();
 }
-
 startGame();
