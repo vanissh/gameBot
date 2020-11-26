@@ -6,7 +6,7 @@ function isNumber(n){
 
 function startGame (){
     const number = Math.floor(Math.random() * 100) + 1;
-    let atm = 3;
+    let atm = 10;
 
     function enterUserNumber(){
         const userNumber = prompt('Угадай число от 1 до 100');
@@ -14,7 +14,7 @@ function startGame (){
         function checkAttemptsNumber(){
             let check1 = confirm('Попытки закончились. Хотите сыграть еще?');
             if (check1){
-                atm = 3;
+                atm = 10;
                 startGame();
             } else {
                 alert('Игра окончена.');
@@ -51,7 +51,7 @@ function startGame (){
             case(+userNumber === number):
                 let check2 = confirm('Поздравляю, Вы угадали!Хотите сыграть еще?');
                 if(check2){
-                    atm = 3;
+                    atm = 10;
                     startGame();
                 } else {
                 return;
